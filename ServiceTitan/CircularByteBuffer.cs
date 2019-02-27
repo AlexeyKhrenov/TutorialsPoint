@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace CircularBuffer
 {
@@ -11,49 +12,67 @@ namespace CircularBuffer
         private int readPosition = 0;
         private int writePosition = 0;
 
+        public readonly int Size;
+
         public CircularByteBuffer(int size)
         {
             //array size is bigger by 1. This additional cell stands for the situation when WritePosition
             //catches up with (ReadPosition - 1) index and can't write this byte because it'll meet ReadPosition
-            buffer = new byte[size + 1];
+            Size = size + 1;
+
+            buffer = new byte[Size];
         }
 
-
-
-        private void WriteWorker(byte[] input)
+        public Task Write(byte[] input, int offset, int count)
         {
-            for(var i = 0; i < input.Length; i++)
+            return Task.Factory.StartNew(() => WriteWorker(input, offset, count));
+        }
+
+        public Task<int> Read(byte[] output, int offset, int count)
+        {
+            return Task<int>.Factory.StartNew(() => ReadWorker(output, offset, count));
+        }
+
+        private void WriteWorker(byte[] input, int offset, int count)
+        {
+            for(var i = offset; i < offset + count; i++)
             {
                 while (true)
                 {
+                    int incremented = incrementCircularly(writePosition, Size);
+
                     //check for (writePosition == readPosition) is wrong - it won't start at all
-                    if (writePosition + 1 != readPosition)
+                    if (incremented != readPosition)
                     {
                         buffer[writePosition] = input[i];
-                        writePosition++;
+                        writePosition = incremented;
                         break;
                     }
                 }
             }
         }
 
-        private byte[] ReadWorker(int outputLength)
+        private int ReadWorker(byte[] output, int offset, int count)
         {
-            byte[] output = new byte[outputLength];
-
-            for (var i = 0; i < output.Length; i++)
+            var i = offset;
+            for (; i < offset + count; i++)
             {
                 while (true)
                 {
                     if (readPosition != writePosition)
                     {
                         output[i] = buffer[readPosition];
-                        readPosition++;
+                        readPosition = incrementCircularly(readPosition, Size);
                         break;
                     }
                 }
             }
-            return output;
+            return i - offset;
+        }
+
+        private int incrementCircularly(int i, int circleSize)
+        {
+            return ++i == circleSize ?  0 : i;
         }
     }
 }

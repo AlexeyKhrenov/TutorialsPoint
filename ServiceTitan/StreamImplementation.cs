@@ -50,8 +50,8 @@ namespace ServiceTitan
 
         public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            // Implement this method
-            throw new NotImplementedException();
+            //todo = use cancellationToken
+
         }
     }
 
@@ -60,7 +60,7 @@ namespace ServiceTitan
         public override bool CanWrite => false;
         public override bool CanRead => true;
 
-        public PullStreamImpl(Stream buffer)
+        public PullStreamImpl(Stream buffer)  
         {
 
         }
@@ -71,8 +71,9 @@ namespace ServiceTitan
         public override async Task<int> ReadAsync(byte[] buffer, int offset, int count,
             CancellationToken cancellationToken)
         {
-            // Implement this method
-            throw new NotImplementedException();
+            //todo = use cancellationToken
+
+
         }
     }
 }
