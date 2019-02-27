@@ -8,10 +8,14 @@ namespace ServiceTitan
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            RunAsyncContext().GetAwaiter().GetResult();
-            Console.ReadKey();
+            var tester = new PushToPullStreamTester()
+            {
+                PushToPullFactory = () => new PushToPullStream(100)
+            };
+            tester.Test();
+            Console.WriteLine("Test passed.");
         }
 
         public static async Task RunAsyncContext()

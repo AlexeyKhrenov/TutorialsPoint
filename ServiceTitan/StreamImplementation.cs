@@ -38,11 +38,11 @@ namespace ServiceTitan
         public override bool CanWrite => true;
         public override bool CanRead => false;
 
-        private Stream buffer;
+        public CircularByteBuffer circularBuffer;
 
-        public PushStreamImpl(Stream buffer)
+        public PushStreamImpl(CircularByteBuffer buffer)
         {
-            this.buffer = buffer;
+            circularBuffer = buffer;
         }
 
         public override void Write(byte[] buffer, int offset, int count) =>
@@ -51,7 +51,7 @@ namespace ServiceTitan
         public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
             //todo = use cancellationToken
-
+            await circularBuffer.Write(buffer, offset, count);
         }
     }
 
@@ -60,9 +60,11 @@ namespace ServiceTitan
         public override bool CanWrite => false;
         public override bool CanRead => true;
 
-        public PullStreamImpl(Stream buffer)  
-        {
+        public CircularByteBuffer circularBuffer;
 
+        public PullStreamImpl(CircularByteBuffer buffer)  
+        {
+            circularBuffer = buffer;
         }
 
         public override int Read(byte[] buffer, int offset, int count) =>
@@ -72,8 +74,7 @@ namespace ServiceTitan
             CancellationToken cancellationToken)
         {
             //todo = use cancellationToken
-
-
+            return Task<int>.Run(() => circularBuffer.Read(buffer, offset, count));
         }
     }
 }

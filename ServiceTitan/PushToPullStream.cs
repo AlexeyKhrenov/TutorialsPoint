@@ -16,11 +16,11 @@ namespace ServiceTitan
         public Stream PushStream { get; protected set; }
         public Stream PullStream { get; protected set; }
 
-        private MemoryStream buffer = new MemoryStream();
+        private CircularByteBuffer buffer;
 
         public PushToPullStream(int bufferSize = DefaultBufferSize)
         {
-            buffer = new MemoryStream(bufferSize);
+            buffer = new CircularByteBuffer(bufferSize);
 
             PushStream = new PushStreamImpl(buffer);
             PullStream = new PullStreamImpl(buffer);

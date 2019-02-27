@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Threading.Tasks;
 
-namespace CircularBuffer
+namespace ServiceTitan
 {
-    internal class CircularByteBuffer
+    public class CircularByteBuffer
     {
         private byte[] buffer;
 
