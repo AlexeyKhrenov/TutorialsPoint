@@ -42,25 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AffectContextFlow.cs" />
-    <Compile Include="BadOptimization.cs" />
+    <Compile Include="Algorithms\MinMax.cs" />
+    <Compile Include="Algorithms\Sorting.cs" />
     <Compile Include="BlockingResource.cs" />
-    <Compile Include="Cancellation.cs" />
     <Compile Include="GzipConverter\FileReader.cs" />
     <Compile Include="GzipConverter\FileWriter.cs" />
     <Compile Include="GzipConverter\GzipCompressor.cs" />
     <Compile Include="GzipConverter\MainClass.cs" />
-    <Compile Include="InterLockConstructs.cs" />
     <Compile Include="InterlockedConstructs\AsyncCoordinator.cs" />
     <Compile Include="InterlockedConstructs\CoordinationStatus.cs" />
     <Compile Include="InterlockedConstructs\MultiWebRequests.cs" />
-    <Compile Include="Parallels.cs" />
+    <Compile Include="Median.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleComputeBoundOperationcs.cs" />
-    <Compile Include="SpinLock.cs" />
-    <Compile Include="TaskCancellation.cs" />
-    <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

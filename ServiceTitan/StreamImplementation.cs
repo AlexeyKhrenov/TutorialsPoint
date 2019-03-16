@@ -74,7 +74,7 @@ namespace ServiceTitan
             CancellationToken cancellationToken)
         {
             //todo = use cancellationToken
-            return Task<int>.Run(() => circularBuffer.Read(buffer, offset, count));
+            return await Task<int>.Run(() => circularBuffer.Read(buffer, offset, count));
         }
     }
 }
