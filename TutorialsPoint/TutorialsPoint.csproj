@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Algorithms\MinMax.cs" />
     <Compile Include="Algorithms\Sorting.cs" />
-    <Compile Include="BlockingResource.cs" />
     <Compile Include="GzipConverter\FileReader.cs" />
     <Compile Include="GzipConverter\FileWriter.cs" />
     <Compile Include="GzipConverter\GzipCompressor.cs" />
@@ -52,7 +51,7 @@
     <Compile Include="InterlockedConstructs\AsyncCoordinator.cs" />
     <Compile Include="InterlockedConstructs\CoordinationStatus.cs" />
     <Compile Include="InterlockedConstructs\MultiWebRequests.cs" />
-    <Compile Include="Median.cs" />
+    <Compile Include="Algorithms\Median.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
