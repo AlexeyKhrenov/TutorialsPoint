@@ -34,6 +34,13 @@ namespace UnitTestTutorial
             AssertSequenceEquals(testArray, resultArray);
         }
 
+        [TestMethod]
+        public void TestShellSort()
+        {
+            sort.ShellSort(testArray);
+            AssertSequenceEquals(testArray, resultArray);
+        }
+
         private void AssertSequenceEquals<T>(IEnumerable<T> a, IEnumerable<T> b)
         {
             Assert.IsTrue(a.SequenceEqual(b));

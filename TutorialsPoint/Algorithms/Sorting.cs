@@ -9,7 +9,7 @@ namespace TutorialsPoint.Algorithms
     //this class implements simple algorithms for sorting arrays
     public class Sorting<T>
     {
-
+        //stable
         public void BubbleSort(int[] data)
         {
             for (int i = data.Length - 1; i > 1; i--)
@@ -21,6 +21,7 @@ namespace TutorialsPoint.Algorithms
             }
         }
 
+        //stable
         public void InsertionSort(int[] data)
         {
             for (int i = 1; i < data.Length; i++)
@@ -32,6 +33,7 @@ namespace TutorialsPoint.Algorithms
             }
         }
 
+        //stable
         public void SelectionSort(int[] data)
         {
             for(int i = 0; i < data.Length - 1; i++)
@@ -45,6 +47,44 @@ namespace TutorialsPoint.Algorithms
             }
         }
 
+        public void ShellSort(int[] data)
+        {
+            var gaps = GapsForShellSort(data.Length);
+            for(int gapNo = 0; gapNo < gaps.Count; gapNo++)
+            {
+                int gap = gaps[gapNo];
+
+                for(var i = 0; i < data.Length - gap; i++)
+                {
+                    for(var j = i; j < data.Length - gap; j += gap)
+                    {
+                        if (data[j] > data[j + gap]) Exchange(ref data[j], ref data[j + gap]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Original algorithms for getting gap length for shell sort, introduced
+        /// in 1959 by Donald Shell
+        /// </summary>
+        private List<int> GapsForShellSort(int length)
+        {
+            List<int> result = new List<int>();
+            if (length < 2)
+            {
+                return result;
+            }
+
+            int gap = length;
+            while(gap != 1)
+            {
+                gap = gap / 2;
+                result.Add(gap);
+            }
+
+            return result;
+        }
 
         // no boxing when a value type is passed by reference
         // in, out, ref words are not considered part of the method signature at compile time
