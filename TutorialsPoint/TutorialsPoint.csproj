@@ -45,6 +45,8 @@
     <Compile Include="Algorithms\MinMax.cs" />
     <Compile Include="Algorithms\Sorting.cs" />
     <Compile Include="DataStructures\HashSetByProperty.cs" />
+    <Compile Include="Functions\Iterative.cs" />
+    <Compile Include="Functions\Recursive.cs" />
     <Compile Include="GzipConverter\FileReader.cs" />
     <Compile Include="GzipConverter\FileWriter.cs" />
     <Compile Include="GzipConverter\GzipCompressor.cs" />
