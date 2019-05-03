@@ -8,24 +8,19 @@ namespace TutorialsPoint.Permutations
 {
     class SymmetricGroup
     {
-        private List<int[]> permutations;
+        private List<Permutation> permutations;
 
         public SymmetricGroup(int size)
         {
-            permutations = new List<int[]>();
-            if (size == 1)
-            {
-                permutations.Add(new int[] { 0 });
-                return;
-            }
-
+            permutations = new List<Permutation>();
+            
             // create identical permutation
             int[] e = new int[size];
             for (int i = 0; i < size; i++)
             {
                 e[i] = i;
             }
-            permutations.Add(e);
+            permutations.Add(new Permutation(e));
 
             GenerateRecursive(size, e);
         }
@@ -35,7 +30,7 @@ namespace TutorialsPoint.Permutations
         {
             if (k == 1)
             {
-                PutToPermutations(sourceArray);
+                permutations.Add(new Permutation(sourceArray));
                 return;
             }
             else
@@ -56,13 +51,6 @@ namespace TutorialsPoint.Permutations
                 }
                 
             }
-        }
-
-        private void PutToPermutations(int[] sourceArray)
-        {
-            var targetArray = new int[sourceArray.Length];
-            sourceArray.CopyTo(targetArray, 0);
-            permutations.Add(targetArray);
         }
 
         private void Swap(ref int a, ref int b)
