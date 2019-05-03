@@ -10,7 +10,8 @@ namespace TutorialsPoint.Functions
     {
         public static ulong Factorial(int n)
         {
-            if(n > 20 || n <= 0)
+            //maximum size of ulong is 18 446 744 073 709 551 615
+            if (n > 20 || n <= 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -22,6 +23,7 @@ namespace TutorialsPoint.Functions
                 result = result * (ulong) n;
                 n--;
             }
+
             return result;
         }
     }

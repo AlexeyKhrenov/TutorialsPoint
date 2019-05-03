@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TutorialsPoint.GzipConverter;
+using TutorialsPoint.Permutations;
 
 namespace TutorialsPoint
 {
@@ -12,7 +12,9 @@ namespace TutorialsPoint
     {
         public static void Main(string[] args)
         {
-            MainClass.Run();
+            var s4 = new SymmetricGroup(4);
+
+            var i = "";
         }
     }
 }

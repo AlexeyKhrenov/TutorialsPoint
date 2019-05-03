@@ -55,6 +55,8 @@
     <Compile Include="InterlockedConstructs\CoordinationStatus.cs" />
     <Compile Include="InterlockedConstructs\MultiWebRequests.cs" />
     <Compile Include="Algorithms\Median.cs" />
+    <Compile Include="Permutations\Permutation.cs" />
+    <Compile Include="Permutations\SymmetricGroup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
