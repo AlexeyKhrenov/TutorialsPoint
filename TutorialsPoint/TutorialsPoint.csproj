@@ -47,6 +47,7 @@
     <Compile Include="DataStructures\HashSetByProperty.cs" />
     <Compile Include="Functions\Iterative.cs" />
     <Compile Include="Functions\Recursive.cs" />
+    <Compile Include="Groups\Group.cs" />
     <Compile Include="GzipConverter\FileReader.cs" />
     <Compile Include="GzipConverter\FileWriter.cs" />
     <Compile Include="GzipConverter\GzipCompressor.cs" />
@@ -55,8 +56,8 @@
     <Compile Include="InterlockedConstructs\CoordinationStatus.cs" />
     <Compile Include="InterlockedConstructs\MultiWebRequests.cs" />
     <Compile Include="Algorithms\Median.cs" />
-    <Compile Include="Permutations\Permutation.cs" />
-    <Compile Include="Permutations\SymmetricGroup.cs" />
+    <Compile Include="Groups\Permutations\Permutation.cs" />
+    <Compile Include="Groups\Permutations\SymmetricGroup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

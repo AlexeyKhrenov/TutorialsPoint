@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TutorialsPoint.Permutations;
+using TutorialsPoint.Groups.Permutations;
 
 namespace TutorialsPoint
 {

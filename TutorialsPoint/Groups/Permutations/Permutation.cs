@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorialsPoint.Permutations
+namespace TutorialsPoint.Groups.Permutations
 {
-    public class Permutation
+    public class Permutation : IEquatable<Permutation>
     {
         private int[] _permutation;
 
@@ -82,6 +82,48 @@ namespace TutorialsPoint.Permutations
             }
 
             return new Permutation(targetPermutation);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var permB = obj as Permutation;
+            if (permB == null)
+            {
+                return false;
+            }
+
+            return this.Equals(permB);
+        }
+
+        public bool Equals(Permutation b)
+        {
+            if (this.GetHashCode() != b.GetHashCode())
+            {
+                return false;
+            }
+            return this == b;
+        }
+
+        public override int GetHashCode()
+        {
+            // there're a lot of collisions so don't omit to call Equals method
+            // in case HashCode returns false;
+            int hashCode = 0;
+            for (int i = 0; i < Size; i++)
+            {
+                hashCode += _permutation[i];
+            }
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return String.Join(" ", _permutation);
         }
     }
 }

@@ -4,25 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorialsPoint.Permutations
+namespace TutorialsPoint.Groups.Permutations
 {
-    class SymmetricGroup
+    public class SymmetricGroup : Group<Permutation>
     {
-        private List<Permutation> permutations;
+        public override List<Permutation> Set { get; set; }
 
-        public SymmetricGroup(int size)
+        public SymmetricGroup(int size) : base()
         {
-            permutations = new List<Permutation>();
-            
             // create identical permutation
             int[] e = new int[size];
             for (int i = 0; i < size; i++)
             {
                 e[i] = i;
             }
-            permutations.Add(new Permutation(e));
-
             GenerateRecursive(size, e);
+        }
+
+        public override Permutation Operation(Permutation a, Permutation b)
+        {
+            return a + b;
         }
 
         // Heap's algorithm -  proposed by B. R. Heap in 1963
@@ -30,7 +31,7 @@ namespace TutorialsPoint.Permutations
         {
             if (k == 1)
             {
-                permutations.Add(new Permutation(sourceArray));
+                Set.Add(new Permutation(sourceArray));
                 return;
             }
             else
