@@ -10,6 +10,7 @@ using TutorialsPoint.Groups.Permutations;
 using TutorialsPoint.LinearAlgebra;
 using TutorialsPoint.NumberTheory;
 
+using TutorialsPoint.MultiThreaded;
 using TutorialsPoint.MultiThreaded.Philosophers;
 
 namespace TutorialsPoint
@@ -18,8 +19,7 @@ namespace TutorialsPoint
     {
         public static void Main(string[] args)
         {
-            var table = new Table();
-            table.Run();
+            new SimpleDeadlock().Run();
             Console.ReadKey();
         }
     }

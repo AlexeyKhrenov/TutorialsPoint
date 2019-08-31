@@ -63,6 +63,7 @@
     <Compile Include="MultiThreaded\Philosophers\Fork.cs" />
     <Compile Include="MultiThreaded\Philosophers\Philosopher.cs" />
     <Compile Include="MultiThreaded\Philosophers\Table.cs" />
+    <Compile Include="MultiThreaded\SimpleDeadlock.cs" />
     <Compile Include="NumberTheory\Euclidean.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
