@@ -19,8 +19,41 @@ namespace TutorialsPoint
     {
         public static void Main(string[] args)
         {
-            new SimpleDeadlock().Run();
-            Console.ReadKey();
+            var list = new List<Dict>()
+            {
+                new Dict()
+                {
+                    Id = 1,
+                    Text = "Text1"
+                },
+                new Dict()
+                {
+                    Id = 2,
+                    Text = "Text2"
+                }
+            };
+
+            var list2 = new List<Dict>()
+            {
+                 new Dict()
+                {
+                    Id = 1,
+                    Text = "Text3"
+                },
+                new Dict()
+                {
+                    Id = 2,
+                    Text = "Text4"
+                }
+            };
+
+            var result = list.Union(list2).Select(x => x.Text).ToList();
+        }
+
+        private class Dict
+        {
+            public int Id;
+            public string Text;
         }
     }
 }

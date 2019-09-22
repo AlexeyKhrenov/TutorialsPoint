@@ -9,70 +9,75 @@ namespace TutorialsPoint.DataStructures
     {
         private byte[] buffer;
 
-        private int readPosition = 0;
-        private int writePosition = 0;
+        // write position
+        private int wp = 0;
+        // read position
+        private int rp = 0;
+        // increase factor specifies how fast buffer will grow in case of overflow
+        private int increaseFactor = 1;
 
         public readonly int Size;
 
-        public CircularByteBuffer(int size)
+        public CircularByteBuffer(int size, int increaseFactor = 2)
         {
-            //array size is bigger by 1. This additional cell stands for the situation when WritePosition
-            //catches up with (ReadPosition - 1) index and can't write this byte because it'll meet ReadPosition
-            Size = size + 1;
-
+            Size = size;
             buffer = new byte[Size];
         }
 
-        public Task Write(byte[] input, int offset, int count)
+        public void Write(byte input)
         {
-            return Task.Factory.StartNew(() => WriteWorker(input, offset, count));
-        }
-
-        public Task<int> Read(byte[] output, int offset, int count)
-        {
-            return Task<int>.Factory.StartNew(() => ReadWorker(output, offset, count));
-        }
-
-        private void WriteWorker(byte[] input, int offset, int count)
-        {
-            for(var i = offset; i < offset + count; i++)
+            if(wp == buffer.Length)
             {
-                while (true)
-                {
-                    int incremented = incrementCircularly(writePosition, Size);
+                IncreaseBuffer();
+            }
 
-                    //check for (writePosition == readPosition) is wrong - it won't start at all
-                    if (incremented != readPosition)
-                    {
-                        buffer[writePosition] = input[i];
-                        writePosition = incremented;
-                        break;
-                    }
+            buffer[wp] = input;
+            wp++;
+        }
+
+        public byte[] Flush(byte input)
+        {
+            if(rp == wp)
+            {
+                return new byte[0];
+            }
+
+            if(rp < wp)
+            {
+                var result = new byte[wp - rp];
+                for (; rp < wp; rp++)
+                {
+                    result[result.Length - wp + rp] = buffer[rp];
                 }
+                rp++;
+                return result;
+            }
+            else
+            {
+                var result = new byte[buffer.Length - rp + wp];
+                for(; rp < buffer.Length; rp++)
+                {
+                    result[result.Length - wp + rp - buffer.Length] = buffer[rp];
+                }
+                rp = 0;
+
+                for (; rp < wp; rp++)
+                {
+                    result[result.Length - wp + rp] = buffer[rp];
+                }
+                rp++;
+                return result;
             }
         }
 
-        private int ReadWorker(byte[] output, int offset, int count)
+        private void IncreaseBuffer()
         {
-            var i = offset;
-            for (; i < offset + count; i++)
+            var newBuffer = new byte[buffer.Length * increaseFactor];
+            for(var i = 0; i < buffer.Length; i++)
             {
-                while (true)
-                {
-                    if (readPosition != writePosition)
-                    {
-                        output[i] = buffer[readPosition];
-                        readPosition = incrementCircularly(readPosition, Size);
-                        break;
-                    }
-                }
+                newBuffer[i] = buffer[i];
             }
-            return i - offset;
-        }
-
-        private int incrementCircularly(int i, int circleSize)
-        {
-            return ++i == circleSize ?  0 : i;
+            buffer = newBuffer;
         }
     }
 }
