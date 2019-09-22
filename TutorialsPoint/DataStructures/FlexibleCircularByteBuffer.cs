@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TutorialsPoint.DataStructures
 {
-    public class CircularByteBuffer
+    public class FlexibleCircularByteBuffer
     {
         private byte[] buffer;
 
@@ -18,7 +18,7 @@ namespace TutorialsPoint.DataStructures
 
         public readonly int Size;
 
-        public CircularByteBuffer(int size, int increaseFactor = 2)
+        public FlexibleCircularByteBuffer(int size, int increaseFactor = 2)
         {
             Size = size;
             buffer = new byte[Size];

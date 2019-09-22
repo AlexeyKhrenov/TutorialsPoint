@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TutorialsPoint.DataStructures
 {
-    public class CircularByteBufferThreaded
+    public class ThreadedCircularByteBuffer
     {
         private byte[] buffer;
 
@@ -14,7 +14,7 @@ namespace TutorialsPoint.DataStructures
 
         public readonly int Size;
 
-        public CircularByteBufferThreaded(int size)
+        public ThreadedCircularByteBuffer(int size)
         {
             //array size is bigger by 1. This additional cell stands for the situation when WritePosition
             //catches up with (ReadPosition - 1) index and can't write this byte because it'll meet ReadPosition
