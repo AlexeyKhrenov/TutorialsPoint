@@ -45,6 +45,7 @@
     <Compile Include="Algorithms\MinMax.cs" />
     <Compile Include="Algorithms\Sorting.cs" />
     <Compile Include="DataStructures\FlexibleCircularByteBuffer.cs" />
+    <Compile Include="DataStructures\SlidingWindow.cs" />
     <Compile Include="DataStructures\ThreadedCircularByteBuffer.cs" />
     <Compile Include="DataStructures\HashSetByProperty.cs" />
     <Compile Include="Functions\Iterative.cs" />
