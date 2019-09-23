@@ -6,7 +6,8 @@ namespace HutterPrize
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Compression started");
+            new CompressorWrapper().Run();
         }
     }
 }

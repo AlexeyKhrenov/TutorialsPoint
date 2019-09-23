@@ -4,37 +4,51 @@ using System.Text;
 using System.IO;
 using System.Runtime.CompilerServices;
 
+using TutorialsPoint.DataStructures;
+
 namespace HutterPrize.FrequencyAnalysis
 {
-    class FrequencyAnalysis
+    class FrequencyAnalyser
     {
-        private Stream stream;
-        private byte[] delimiter;
-        private byte[] delimeterBuffer;
+        private SlidingWindow[] windows;
 
-        public FrequencyAnalysis(Stream stream, byte[] delimiter)
+        public FrequencyAnalyser(int longestSlidingWindow)
         {
-            this.stream = stream;
-            this.delimiter = delimiter;
-
-        }
-
-        public FrequencyReport GetNumberOfWords()
-        {
-            var report = new FrequencyReport();
-
-            var buffer = new List<byte>();
-            buffer.Capacity = 1000;
-
-            while (stream.ReadByte(out var ))
+            if(longestSlidingWindow < 1)
             {
+                throw new ArgumentException();
+            }
 
+            windows = new SlidingWindow[longestSlidingWindow];
+
+            for(var i = 1; i <= longestSlidingWindow; i++)
+            {
+                windows[i - 1] = new SlidingWindow(i);
             }
         }
 
-        public bool CheckDelimeter()
+        public FrequencyReport Run(Stream stream)
         {
+            var report = new FrequencyReport();
 
+            int b = stream.ReadByte();
+
+            while(b != -1)
+            {
+                for (var i = 0; i < windows.Length; i++)
+                {
+                    windows[i].Push((byte) b);
+                    if(windows[i].TryConvertToArray(out var result))
+                    {
+                        report.CountWord(result);
+                    }
+                }
+
+                b = stream.ReadByte();
+            }
+            report.Format();
+
+            return report;
         }
     }
 }

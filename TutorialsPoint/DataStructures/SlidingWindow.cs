@@ -13,6 +13,11 @@ namespace TutorialsPoint.DataStructures
 
         public SlidingWindow(int size)
         {
+            if(size < 1)
+            {
+                throw new ArgumentException();
+            }
+
             buffer = new byte?[size];
             writePosition = 0;
         }
@@ -25,6 +30,44 @@ namespace TutorialsPoint.DataStructures
             }
             buffer[writePosition] = input;
             writePosition++;
+        }
+
+        public bool TryConvertToArray(out byte[] result)
+        {
+            result = new byte[buffer.Length];
+
+            if (!IsFilled())
+            {
+                return false;
+            }
+
+            for(var i = 0; i < result.Length; i++)
+            {
+                if(writePosition == buffer.Length)
+                {
+                    writePosition = 0;
+                }
+                result[i] = buffer[writePosition].Value;
+
+                writePosition++;
+            }
+
+            return true;
+        }
+
+        public bool IsFilled()
+        {
+            if(buffer[buffer.Length - 1] == null)
+            {
+                return false;
+            }
+
+            if(writePosition != 0 && buffer[writePosition - 1] == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public void Clean()
@@ -58,6 +101,19 @@ namespace TutorialsPoint.DataStructures
             }
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append(buffer[0].ToString());
+            builder.Append(", ");
+
+            for(var i = 1; i < buffer.Length; i++)
+            {
+                builder.Append(buffer[i]);
+            }
+            return builder.ToString();
         }
     }
 }

@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace HutterPrize.FrequencyAnalysis
 {
     class FrequencyReport
     {
         // byte array represents single word
-        public Dictionary<byte[], int> WordDictionary => dict;
+        public Dictionary<Word, int> WordDictionary => dict;
 
-        private Dictionary<byte[], int> dict { get; set; }
+        private Dictionary<Word, int> dict { get; set; }
 
         public byte[] LongestWord { get; set; }
         
         public FrequencyReport()
         {
-            dict = new Dictionary<byte[], int>();
+            dict = new Dictionary<Word, int>();
             LongestWord = new byte[0];
         }
 
-        public void CountWord(byte[] word)
+        public void CountWord(byte[] arr)
         {
+            var word = new Word(arr);
+
             if (dict.ContainsKey(word))
             {
                 dict[word]++;
@@ -29,6 +32,11 @@ namespace HutterPrize.FrequencyAnalysis
             {
                 dict.Add(word, 1);
             }
+        }
+
+        public void Format()
+        {
+            dict = dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
