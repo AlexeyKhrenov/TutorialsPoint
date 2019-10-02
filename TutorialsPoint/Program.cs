@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,41 +19,20 @@ namespace TutorialsPoint
     {
         public static void Main(string[] args)
         {
-            var list = new List<Dict>()
+            var timeZones = TimeZoneInfo.GetSystemTimeZones();
+            var length = 0;
+
+            var ids = timeZones.Select(x => x.Id).ToList();
+                
+            var builder = new StringBuilder();
+
+            foreach(var zone in timeZones)
             {
-                new Dict()
-                {
-                    Id = 1,
-                    Text = "Text1"
-                },
-                new Dict()
-                {
-                    Id = 2,
-                    Text = "Text2"
-                }
-            };
+                builder.Append($"('{zone.Id}'),");
+            }
+            var result = builder.ToString();
 
-            var list2 = new List<Dict>()
-            {
-                 new Dict()
-                {
-                    Id = 1,
-                    Text = "Text3"
-                },
-                new Dict()
-                {
-                    Id = 2,
-                    Text = "Text4"
-                }
-            };
-
-            var result = list.Union(list2).Select(x => x.Text).ToList();
-        }
-
-        private class Dict
-        {
-            public int Id;
-            public string Text;
+            Console.ReadKey();
         }
     }
 }

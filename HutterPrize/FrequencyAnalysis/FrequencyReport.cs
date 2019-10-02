@@ -12,12 +12,9 @@ namespace HutterPrize.FrequencyAnalysis
 
         private Dictionary<Word, int> dict { get; set; }
 
-        public byte[] LongestWord { get; set; }
-        
         public FrequencyReport()
         {
             dict = new Dictionary<Word, int>();
-            LongestWord = new byte[0];
         }
 
         public void CountWord(byte[] arr)
