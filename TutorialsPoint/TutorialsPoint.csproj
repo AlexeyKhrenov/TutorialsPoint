@@ -48,7 +48,8 @@
     <Compile Include="DataStructures\SlidingWindow.cs" />
     <Compile Include="DataStructures\ThreadedCircularByteBuffer.cs" />
     <Compile Include="DataStructures\HashSetByProperty.cs" />
-    <Compile Include="Encoding\BitStream.cs" />
+    <Compile Include="Encoding\BitSequence.cs" />
+    <Compile Include="Encoding\BitStreamWriter.cs" />
     <Compile Include="Functions\Iterative.cs" />
     <Compile Include="Functions\Recursive.cs" />
     <Compile Include="Groups\Group.cs" />

@@ -50,6 +50,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitSequenceTest.cs" />
     <Compile Include="BitStreamTest.cs" />
     <Compile Include="GroupTest.cs" />
     <Compile Include="PermutationTest.cs" />

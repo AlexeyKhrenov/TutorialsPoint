@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,48 +10,55 @@ using TutorialsPoint.Encoding;
 namespace UnitTestTutorial
 {
     [TestClass]
-    public class BitStreamTest
+    public class BitStreamWriterTest
     {
         [TestMethod]
-        public void IntegetToStringTest() //0000 0000 0111 0010 1110 0100 0100 1100
+        public void AppendBitsTest1()
         {
-            var dict = new Dictionary<int, string>()
-            {
-                {       2, "0000 0000 0000 0000 0000 0000 0000 0010".Replace(" ", "") },
-                {       0, "0000 0000 0000 0000 0000 0000 0000 0000".Replace(" ", "") },
-                { 7529548, "0000 0000 0111 0010 1110 0100 0100 1100".Replace(" ", "") }
-            };
-
-            var builder = new StringBuilder();
-
-            foreach(var pair in dict)
-            {
-                BitStream.ToBitsString(pair.Key, builder);
-                var result = builder.ToString();
-                Assert.AreEqual(pair.Value, result);
-                builder.Clear();
-            }
+            var bitStream = new BitStreamWriter(new MemoryStream());
+            var result = bitStream.ToString();
+            Assert.AreEqual("", result);
         }
 
         [TestMethod]
-        public void BitSequenceToStringTest()
+        public void AppendBitsTest2()
         {
+            var ms = new MemoryStream();
+            var bitStream = new BitStreamWriter(ms);
+            var a1 = new BitSequence() { Bits = 6, Length = 6 };
+            var a2 = new BitSequence() { Bits = 1, Length = 2 };
+            var a3 = new BitSequence() { Bits = 7, Length = 5 };
+            var expected = "000110 01 00111".Replace(" ", "");
+            bitStream.Write(a1);
+            bitStream.Write(a2);
+            bitStream.Write(a3);
+            Assert.AreEqual(bitStream.ToString(), expected);
+        }
+
+        [TestMethod]
+        public void AppendBitsTest3()
+        {
+            var bitStream = new BitStreamWriter(new MemoryStream());
             var dict = new Dictionary<BitSequence, string>()
             {
-                { new BitSequence(){ Bits = 0, Length = 0 }, "" },
-                { new BitSequence() { Bits = 3, Length = 4 }, "0011"},
-                { new BitSequence() { Bits = 7529548, Length = 24 }, "0111 0010 1110 0100 0100 1100".Replace(" ", "") }
+                { new BitSequence() { Bits = 33, Length = 8 }, "00100001" },
+                { new BitSequence() { Bits = 4, Length = 3 }, "100" },
+                { new BitSequence() { Bits = 7, Length = 5 }, "00111" },
+                { new BitSequence() { Bits = 1, Length = 2 }, "01" },
+                { new BitSequence() { Bits = 4, Length = 4 }, "0100" },
+                { new BitSequence() { Bits = 33, Length = 9 }, "000100001" },
+                { new BitSequence() { Bits = 7, Length = 6 }, "000111" },
             };
 
-            var builder = new StringBuilder();
+            string expected = "";
 
             foreach(var pair in dict)
             {
-                BitStream.ToBitsString(pair.Key, builder);
-                var result = builder.ToString();
-                Assert.AreEqual(pair.Value, result);
-                builder.Clear();
+                expected += pair.Value;
+                bitStream.Write(pair.Key);
             }
+
+            Assert.AreEqual(bitStream.ToString(), expected.Replace(" ", ""));
         }
     }
 }
