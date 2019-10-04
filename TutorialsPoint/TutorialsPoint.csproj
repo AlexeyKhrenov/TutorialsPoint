@@ -49,6 +49,7 @@
     <Compile Include="DataStructures\ThreadedCircularByteBuffer.cs" />
     <Compile Include="DataStructures\HashSetByProperty.cs" />
     <Compile Include="Encoding\BitSequence.cs" />
+    <Compile Include="Encoding\BitStreamReader.cs" />
     <Compile Include="Encoding\BitStreamWriter.cs" />
     <Compile Include="Functions\Iterative.cs" />
     <Compile Include="Functions\Recursive.cs" />
