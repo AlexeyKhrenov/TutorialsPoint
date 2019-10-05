@@ -30,6 +30,7 @@ namespace HutterPrize.FrequencyAnalysis
         public FrequencyReport Run(Stream stream)
         {
             var report = new FrequencyReport();
+            report.SizeBytes = stream.Length;
 
             int b = stream.ReadByte();
 
@@ -46,7 +47,6 @@ namespace HutterPrize.FrequencyAnalysis
 
                 b = stream.ReadByte();
             }
-            report.Format();
 
             return report;
         }

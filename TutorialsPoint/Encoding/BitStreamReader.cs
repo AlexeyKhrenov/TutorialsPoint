@@ -32,8 +32,10 @@ namespace TutorialsPoint.Encoding
             byteForRead = new BitSequence() { Bits = (byte) bits, Length = length };
         }
 
+        //method returns BitSequence with 0 length if the stream is empty
         public BitSequence ReadBit()
         {
+            // check for the last byte
             if(lastBitSequence)
             {
                 if(byteForRead.Length == 0)
@@ -41,26 +43,45 @@ namespace TutorialsPoint.Encoding
                     CanRead = false;
                     return byteForRead;
                 }
-
-                if(byteForRead.Length == 1)
-                {
-                    var result = byteForRead;
-                    byteForRead = new BitSequence();
-                    return result;
-                }
-
-                return byteForRead;
             }
 
-            if (lastBitSequence)
+            if (byteForRead.Length == 0)
             {
-                var bits = byteForRead >> byteForRead.Length - 1;
+                RetrieveNextByte();
             }
 
-            if(stream.Position == Length - 1)
+            var result = new BitSequence()
             {
-                lastBitSequence
+                Bits = (byte)(byteForRead.Bits >> (byteForRead.Length - 1)),
+                Length = 1
+            };
+
+            var dx = BitSequence.ByteLength - byteForRead.Length + 1;
+            byteForRead.Bits = (byte)(byteForRead.Bits << dx);
+            byteForRead.Bits = (byte)(byteForRead.Bits >> dx);
+            byteForRead.Length -= 1;
+
+            return result;
+        }
+
+        private void RetrieveNextByte()
+        {
+            int bits;
+            int length;
+
+            if (stream.Position == stream.Length - 2)
+            {
+                bits = stream.ReadByte();
+                length = stream.ReadByte();
+                lastBitSequence = true;
             }
+            else
+            {
+                bits = stream.ReadByte();
+                length = BitSequence.ByteLength;
+            }
+
+            byteForRead = new BitSequence() { Bits = (byte)bits, Length = (byte)length };
         }
     }
 }

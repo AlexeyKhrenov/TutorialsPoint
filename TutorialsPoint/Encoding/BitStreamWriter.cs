@@ -42,7 +42,7 @@ namespace TutorialsPoint.Encoding
             }
         }
 
-        public void EndWrite(byte input)
+        public void EndWrite()
         {
             stream.WriteByte(IncompleteLastInteger.Bits);
             stream.WriteByte(IncompleteLastInteger.Length);

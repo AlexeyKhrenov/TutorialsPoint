@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace HutterPrize.FrequencyAnalysis
 {
-    class FrequencyReport
+    public class FrequencyReport
     {
+        public long SizeBytes;
+
         // byte array represents single word
         public Dictionary<Word, int> WordDictionary => dict;
 
