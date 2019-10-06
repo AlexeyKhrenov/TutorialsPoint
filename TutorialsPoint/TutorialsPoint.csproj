@@ -52,6 +52,7 @@
     <Compile Include="Encoding\BitStreamReader.cs" />
     <Compile Include="Encoding\BitStreamWriter.cs" />
     <Compile Include="Encoding\LongBitSequence.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Functions\Iterative.cs" />
     <Compile Include="Functions\Recursive.cs" />
     <Compile Include="Groups\Group.cs" />

@@ -56,5 +56,41 @@ namespace HutterPrize.FrequencyAnalysis
 
             return true;
         }
+
+        public bool IsSuffixOf(Word other)
+        {
+            if (other.Length <= Length)
+            {
+                return false;
+            }
+
+            for (var i = Length - 1; i >= 0; i--)
+            {
+                if (other._arr[i] != _arr[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool IsPrefixOf(Word other)
+        {
+            if (other.Length <= Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < Length; i++)
+            {
+                if (other._arr[i] != _arr[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

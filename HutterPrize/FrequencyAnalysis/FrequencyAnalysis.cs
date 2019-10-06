@@ -12,6 +12,9 @@ namespace HutterPrize.FrequencyAnalysis
     {
         private SlidingWindow[] windows;
 
+        public FrequencyReport Report => report;
+        private FrequencyReport report = new FrequencyReport();
+
         public FrequencyAnalyser(int longestSlidingWindow)
         {
             if(longestSlidingWindow < 1)
@@ -27,15 +30,16 @@ namespace HutterPrize.FrequencyAnalysis
             }
         }
 
-        public FrequencyReport Run(Stream stream)
+        public void Run(Stream stream)
         {
-            var report = new FrequencyReport();
             report.SizeBytes = stream.Length;
 
             int b = stream.ReadByte();
 
-            while(b != -1)
+            while (b != -1)
             {
+                report.ProcessedBytes++;
+
                 for (var i = 0; i < windows.Length; i++)
                 {
                     windows[i].Push((byte) b);
@@ -47,8 +51,6 @@ namespace HutterPrize.FrequencyAnalysis
 
                 b = stream.ReadByte();
             }
-
-            return report;
         }
     }
 }
