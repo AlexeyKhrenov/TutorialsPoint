@@ -19,20 +19,28 @@ namespace TutorialsPoint
     {
         public static void Main(string[] args)
         {
-            var timeZones = TimeZoneInfo.GetSystemTimeZones();
-            var length = 0;
+            int count = 0;
 
-            var ids = timeZones.Select(x => x.Id).ToList();
-                
-            var builder = new StringBuilder();
-
-            foreach(var zone in timeZones)
+            for (var i = 1; i < 10000; i++)
             {
-                builder.Append($"('{zone.Id}'),");
+                if (IsGood(i))
+                {
+                    count++;
+                }
             }
-            var result = builder.ToString();
 
             Console.ReadKey();
+        }
+
+        public static bool IsGood(int i)
+        {
+            var s = i.ToString().ToArray();
+            for (var j = 0; j < s.Length - 1; j++)
+            {
+                var k = j + 1;
+                if (s[k] == s[j]) return false;
+            }
+            return true;
         }
     }
 }
