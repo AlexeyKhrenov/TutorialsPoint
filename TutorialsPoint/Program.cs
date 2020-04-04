@@ -12,35 +12,31 @@ using TutorialsPoint.NumberTheory;
 
 using TutorialsPoint.MultiThreaded;
 using TutorialsPoint.MultiThreaded.Philosophers;
+using System.Reflection;
 
 namespace TutorialsPoint
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            int count = 0;
+            var shortString = "prefix";
+            var longString = "1234567890123456";
+            var tooLongString = Guid.NewGuid().ToString();
 
-            for (var i = 1; i < 10000; i++)
-            {
-                if (IsGood(i))
-                {
-                    count++;
-                }
-            }
-
-            Console.ReadKey();
+            var result2 = longString.Substring(0, 16);
+            var result3 = tooLongString.Substring(0, 16);
         }
+    }
 
-        public static bool IsGood(int i)
+    class DiConfigurator
+    {
+        public Func<Type> GetDeclaringType()
         {
-            var s = i.ToString().ToArray();
-            for (var j = 0; j < s.Length - 1; j++)
+            return () =>
             {
-                var k = j + 1;
-                if (s[k] == s[j]) return false;
-            }
-            return true;
+                return MethodBase.GetCurrentMethod().DeclaringType;
+            };
         }
     }
 }
