@@ -42,17 +42,11 @@ namespace TutorialsPoint.MultiThreaded
 
             for (var i = 0; i < randNumberOfNodes; i++)
             {
-                try
+                var childNode = new Node();
+                node.ChildNodes[i] = childNode;
+                if (!token.IsCancellationRequested)
                 {
-                    node.ChildNodes[0] = new Node();
-                    if (!token.IsCancellationRequested)
-                    {
-                        ThreadPool.QueueUserWorkItem(obj => TraverseNode(cts.Token, node));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    ThreadPool.QueueUserWorkItem(obj => TraverseNode(cts.Token, childNode));
                 }
             }
         }
