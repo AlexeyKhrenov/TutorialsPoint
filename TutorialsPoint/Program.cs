@@ -20,23 +20,14 @@ namespace TutorialsPoint
     {
         public static void Main()
         {
-            var shortString = "prefix";
-            var longString = "1234567890123456";
-            var tooLongString = Guid.NewGuid().ToString();
+            var threadPoolTreeTraversal = new ThreadPoolTreeTraversal();
+            ThreadPool.QueueUserWorkItem(obj => threadPoolTreeTraversal.RunHost());
+            Thread.Sleep(3000);
+            threadPoolTreeTraversal.Stop();
 
-            var result2 = longString.Substring(0, 16);
-            var result3 = tooLongString.Substring(0, 16);
-        }
-    }
-
-    class DiConfigurator
-    {
-        public Func<Type> GetDeclaringType()
-        {
-            return () =>
-            {
-                return MethodBase.GetCurrentMethod().DeclaringType;
-            };
+            var tree = threadPoolTreeTraversal.Tree;
+            var maxHeight = tree.MaxHeight();
+            var minHeight = tree.MinHeight();
         }
     }
 }

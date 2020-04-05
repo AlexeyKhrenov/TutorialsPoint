@@ -59,6 +59,7 @@
     <Compile Include="HashSetByPropertyTest.cs" />
     <Compile Include="SortingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
