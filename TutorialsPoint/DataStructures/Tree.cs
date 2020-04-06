@@ -14,7 +14,7 @@ namespace TutorialsPoint.DataStructures
 
         public object Value;
 
-        public Node()
+        public Node()   
         {
         }
 
@@ -58,6 +58,25 @@ namespace TutorialsPoint.DataStructures
             return MinHeight(Root, 0);
         }
 
+        public int CountNodes()
+        {
+            if (Root == null)
+            {
+                return 0;
+            }
+
+            return CountNodes(Root, 0);
+        }
+
+        public int CountLeaves()
+        {
+            if (Root == null)
+            {
+                return 0;
+            }
+
+            return CountLeaves(Root, 0);
+        }
 
         //TODO - make this functions more consise
         public int MaxHeight(Node node, int maxHeight)
@@ -107,6 +126,38 @@ namespace TutorialsPoint.DataStructures
             }
 
             return childMinHeight != int.MaxValue ? childMinHeight : minHeight;
+        }
+
+        public int CountNodes(Node node, int count)
+        {
+            count++;
+
+            if (node.ChildNodes != null)
+            {
+                foreach (var child in node.ChildNodes)
+                {
+                    count = CountNodes(child, count);
+                }
+            }
+
+            return count;
+        }
+
+        public int CountLeaves(Node node, int count)
+        {
+            if (node.ChildNodes == null)
+            {
+                count++;
+            }
+            else
+            {
+                foreach (var child in node.ChildNodes)
+                {
+                    count = CountLeaves(child, count);
+                }
+            }
+
+            return count;
         }
     }
 }

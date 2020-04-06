@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphs", "Graphs\Graphs.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Competition", "Competition\Competition.csproj", "{13483C0B-C10A-4C7F-BEE1-A2B2E0AFB1B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfomanceConsole", "PerfomanceConsole\PerfomanceConsole.csproj", "{195834FD-FE01-438C-BC1F-3335594980A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{13483C0B-C10A-4C7F-BEE1-A2B2E0AFB1B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13483C0B-C10A-4C7F-BEE1-A2B2E0AFB1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13483C0B-C10A-4C7F-BEE1-A2B2E0AFB1B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195834FD-FE01-438C-BC1F-3335594980A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195834FD-FE01-438C-BC1F-3335594980A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195834FD-FE01-438C-BC1F-3335594980A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195834FD-FE01-438C-BC1F-3335594980A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

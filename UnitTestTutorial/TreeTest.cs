@@ -29,6 +29,22 @@ namespace UnitTestTutorial
             Assert.AreEqual(minHeight, 2);
         }
 
+        [TestMethod]
+        public void TreeTest_Count_1()
+        {
+            var tree = CreateSampleUnbalancedTree();
+            var count = tree.CountNodes();
+            Assert.AreEqual(count, 8);
+        }
+
+        [TestMethod]
+        public void TreeTest_CountLeaves_1()
+        {
+            var tree = CreateSampleUnbalancedTree();
+            var countLeaves = tree.CountLeaves();
+            Assert.AreEqual(countLeaves, 4);
+        }
+
         private Tree CreateSampleUnbalancedTree()
         {
             var tree = new Tree();
